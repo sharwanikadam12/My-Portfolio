@@ -1,0 +1,463 @@
+:root {
+    --bg: #0a0a0a;
+    --mint: #d1f7ea;
+    --purple: #e2d1f7;
+    --pink: #f7d1e8;
+    --blue: #d1e8f7b0;
+    --glass: #48d1dda6;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; cursor: none; }
+
+body {
+    background: var(--bg);
+    color: #e0e0e0;
+    font-family: 'Inter', sans-serif;
+    overflow-x: hidden;
+}
+
+/* --- INTRO --- */
+#intro-overlay {
+    position: fixed; inset: 0; background: black; z-index: 1000;
+    display: flex; justify-content: center; align-items: center; transition: 0s;
+}
+.intro-dot {
+    width: 10px; height: 10px; background: var(--pink); border-radius: 50%;
+    box-shadow: 0 0 20px var(--pink); animation: expand 3s forwards;
+}
+@keyframes expand {
+    0% { transform: scale(1); }
+    50% { width: 10px; height: 10px; border-radius: 50%; }
+    100% { width: 350px; height: 60px; border-radius: 30px; opacity: 1; }
+}
+.intro-text { position: absolute; opacity: 0; color: black; font-weight: 600; animation: fade 1s 2.2s forwards; }
+@keyframes fade { to { opacity: 1; } }
+
+/* --- NAV --- */
+nav {
+    position: fixed; top: 20px; left: 50%; transform: translateX(-50%); z-index: 100;
+    background: var(--glass); backdrop-filter: blur(10px); padding: 15px 40px;
+    border-radius: 50px; border: 1px solid rgba(255,255,255,0.1); display: flex; gap: 30px;
+}
+nav a { text-decoration: none; color: white; font-size: 0.8rem; letter-spacing: 1px; transition: 0.3s; }
+nav a.active { color: var(--mint); text-shadow: 0 0 10px var(--mint); }
+
+/* --- SECTIONS --- */
+section {
+    min-height: 100vh; padding: 100px 10%; display: flex; flex-direction: column;
+    justify-content: center; opacity: 0; transform: translateY(30px); transition: 1s;
+}
+section.visible { opacity: 1; transform: translateY(0); }
+.section-title { text-align: center; font-size: 3rem; margin-bottom: 50px; color: var(--purple); font-family: 'Playfair Display', serif; }
+
+/* --- HERO --- */
+
+.hero-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* This prevents the image from stretching */
+    display: block;
+}
+
+.hero-container { 
+    display: grid; grid-template-columns: 1fr 1fr; align-items: center; gap: 100px; }
+.profile-pic {
+    width: 300px; height: 300px; background: linear-gradient(45deg, var(--mint), var(--purple));
+    border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%; animation: float 4s ease-in-out infinite;
+    display: flex; align-items: center; justify-content: center; font-size: 3rem;
+}
+@keyframes float { 50% { transform: translateY(-20px); } }
+.hero-content h1 span { color: var(--pink); text-shadow: 0 0 15px var(--pink); }
+
+.btn-say-hello {
+    padding: 12px 30px; border: 1px solid var(--mint); color: var(--mint);
+    text-decoration: none; border-radius: 25px; transition: 0.3s; display: inline-block; margin-top: 20px;
+}
+.btn-say-hello:hover { background: var(--mint); color: black; box-shadow: 0 0 20px var(--mint); }
+
+/* --- PROJECTS --- */
+.project-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 30px; }
+.flip-card { height: 220px; perspective: 1000px; }
+.flip-card-inner { position: relative; width: 100%; height: 100%; transition: 0.8s; transform-style: preserve-3d; }
+.flip-card:hover .flip-card-inner { transform: rotateY(180deg); }
+.flip-front, .flip-back {
+    position: absolute; width: 100%; height: 100%; backface-visibility: hidden;
+    background: var(--glass); border-radius: 20px; display: flex; flex-direction: column;
+    justify-content: center; align-items: center; border: 1px solid rgba(255,255,255,0.1);
+}
+.flip-back { transform: rotateY(180deg); background: rgba(255,255,255,0.08); padding: 20px; }
+.badge { background: var(--pink); color: black; font-size: 0.7rem; padding: 2px 10px; border-radius: 10px; margin-top: 10px; }
+
+/* --- SKILLS --- */
+/* --- FLOATING DOCK (TASKBAR) --- */
+.dock-container {
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 1000;
+}
+
+.dock {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    background: rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(15px);
+    padding: 10px 20px;
+    border-radius: 24px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+}
+
+.dock-item {
+    position: relative;
+    width: 45px;
+    height: 45px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 12px;
+    color: white;
+    font-size: 1.2rem;
+    text-decoration: none;
+    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+/* Tooltip on hover */
+.dock-item::after {
+    content: attr(data-name);
+    position: absolute;
+    top: -40px;
+    background: rgba(0,0,0,0.8);
+    color: var(--mint);
+    padding: 5px 12px;
+    border-radius: 8px;
+    font-size: 0.7rem;
+    opacity: 0;
+    pointer-events: none;
+    transition: 0.2s;
+}
+
+.dock-item:hover {
+    transform: scale(1.4) translateY(-10px);
+    background: var(--glass);
+    color: var(--mint);
+}
+
+.dock-item:hover::after {
+    opacity: 1;
+}
+
+/* --- 3D SKILLS CARDS --- */
+.skills-3d-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 25px;
+    perspective: 1000px;
+}
+
+.skill-card-3d {
+    background: var(--glass);
+    border: 1px solid rgba(255,255,255,0.1);
+    height: 180px;
+    border-radius: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+    transition: transform 0.5s ease, box-shadow 0.5s ease;
+    transform-style: preserve-3d;
+}
+
+.skill-card-3d i {
+    font-size: 3rem;
+    color: var(--accent);
+    filter: drop-shadow(0 0 10px var(--accent));
+    transition: 0.3s;
+}
+
+.skill-card-3d span {
+    font-weight: 600;
+    font-size: 0.9rem;
+    color: var(--text-main);
+}
+
+.skill-card-3d:hover {
+    transform: rotateX(10deg) rotateY(10deg) translateZ(20px);
+    box-shadow: 0 15px 35px rgba(0,0,0,0.5), 0 0 15px var(--accent);
+    border-color: var(--accent);
+}
+
+
+
+/* --- STABLE JAR SYSTEM --- */
+/* --- THE JAR FOUNTAIN SYSTEM --- */
+/* --- REFINED JAR INTERACTION CSS --- */
+
+.section-subtitle {
+    text-align: center;
+    color: var(--purple);
+    margin-bottom: 50px;
+}
+
+.jars-wrapper {
+    display: flex;
+    justify-content: center;
+    gap: 80px; /* Space between jars */
+    margin-top: 50px;
+    position: relative;
+    padding-bottom: 100px; /* Space for the return animation */
+}
+
+.jar-container {
+    position: relative;
+    width: 100px; /* Base size of the jar */
+    height: 150px;
+    cursor: pointer;
+    perspective: 1000px;
+}
+
+/* The Jar body */
+.jar {
+    width: 100%;
+    height: 100%;
+    background: rgba(255, 255, 255, 0.08);
+    border: 2px solid rgba(255, 255, 255, 0.2);
+    border-radius: 8px 8px 35px 35px; /* Rounded bottom */
+    backdrop-filter: blur(10px);
+    z-index: 1;
+    position: relative;
+}
+
+/* The Lid */
+.jar-lid {
+    width: 110%;
+    height: 15px;
+    background: #4a4a4a;
+    position: absolute;
+    top: -12px;
+    left: -5%;
+    border-radius: 4px;
+    z-index: 2;
+    transition: transform 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+/* Label below the jar */
+.jar-label {
+    text-align: center;
+    margin-top: 10px;
+    color: var(--mint);
+    font-weight: 600;
+}
+
+/* Container for the fountain images */
+.jar-content-fountain {
+    position: absolute;
+    bottom: 0; /* Starts inside the jar */
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100%;
+    height: 100%;
+    pointer-events: none; /* Stops images from blocking clicks */
+    z-index: 0;
+}
+
+/* Common style for emerging images */
+.fountain-img {
+    position: absolute;
+    width: 50px; /* Start small */
+    height: 50px;
+    border-radius: 50%;
+    border: 3px solid white;
+    box-shadow: 0 0 15px rgba(255, 255, 255, 0.3);
+    opacity: 0;
+    object-fit: cover;
+    bottom: 10px; /* Start inside the jar body */
+    left: calc(50% - 25px); /* Center */
+}
+
+/* --- THE FOUNTAIN ANIMATION --- */
+/* Fast Pop Up -> Spread Out -> Center Big Zoom -> Return */
+@keyframes imageFountain {
+    0% {
+        opacity: 0;
+        transform: translate(0, 0) scale(0.5) rotate(0deg);
+        bottom: 10px;
+    }
+    /* Phase 1: FAST Pop up above lid and spread slightly left/right */
+    10% {
+        opacity: 1;
+        transform: translate(calc(var(--spread-x) * 1px), -200px) scale(1) rotate(calc(var(--base-rot) * 1deg));
+        bottom: 10px;
+    }
+    /* Phase 2: Drift out further to the far left and right edges */
+    30% {
+        opacity: 1;
+        transform: translate(calc(var(--spread-x) * 2.5px), -300px) scale(1.1);
+    }
+    /* Phase 3: GLIDE to CENTER OF SCREEN, ZOOMS BIG, Very Visible */
+    60% {
+        opacity: 1;
+        /* Glides toward the viewport center */
+        transform: translate(calc(var(--spread-x) * -0.2px), -450px) scale(3) rotate(0deg);
+        box-shadow: 0 0 30px rgba(255, 255, 255, 0.8);
+    }
+    /* Phase 4: Shrinks and Returns to the Jar */
+    100% {
+        opacity: 0;
+        transform: translate(0, 0) scale(0.2);
+        bottom: -50px; /* Returns down and out */
+    }
+}
+
+/* --- Trigger Effects on Hover --- */
+.jar-container:hover .jar-lid {
+    transform: translateY(-50px) rotate(-15deg); /* Lid lifts and tilts */
+}
+
+/* Only trigger the animation when the jar is hovered */
+.jar-container:hover .fountain-img {
+    animation: imageFountain 7s infinite ease-in-out;
+}
+
+/* Individual Spread/Rotation adjustments using CSS variables */
+.img-1 { --spread-x: -80;  --base-rot: -15; }
+.img-2 { --spread-x: -40;  --base-rot: -5;  }
+.img-3 { --spread-x: 0;    --base-rot: 0;   } /* Center */
+.img-4 { --spread-x: 40;   --base-rot: 5;   }
+.img-5 { --spread-x: 80;   --base-rot: 15;  }
+
+/* Responsive adjustment for smaller screens */
+@media (max-width: 768px) {
+    .jars-wrapper { gap: 40px; }
+    .jar-container { width: 80px; height: 120px; }
+    .fountain-img { width: 40px; height: 40px; left: calc(50% - 20px); }
+    
+    @keyframes imageFountain {
+        /* Adjusted for mobile - smaller zoom */
+        0% { opacity: 0; transform: translate(0, 0) scale(0.5); }
+        10% { opacity: 1; transform: translate(calc(var(--spread-x) * 0.7px), -150px) scale(1); }
+        30% { opacity: 1; transform: translate(calc(var(--spread-x) * 1.5px), -220px) scale(1.1); }
+        60% { opacity: 1; transform: translate(0, -320px) scale(2.2); } /* smaller zoom */
+        100% { opacity: 0; transform: translate(0, 0) scale(0.2); bottom: -30px; }
+    }
+}
+
+
+
+
+
+
+/* --- CURSOR --- */
+#cursor-canvas { position: fixed; inset: 0; pointer-events: none; z-index: 9999; }
+
+/* --- CONTACT --- */
+.contact-form { max-width: 500px; margin: 0 auto; width: 100%; }
+input, textarea { width: 100%; padding: 15px; background: var(--glass); border: 1px solid ; border-radius: 10px; color: white; margin-bottom: 15px; }
+.submit-btn { width: 100%; padding: 15px; background: transparent; border: 1px solid var(--pink); color: var(--pink); border-radius: 10px; transition: 0.3s; }
+.submit-btn:hover { background: var(--pink); color: black; box-shadow: 0 0 20px var(--pink); }
+
+footer { text-align: center; padding: 40px; margin-top: 50px; border-top: 1px solid var(--glass); }
+
+@media (max-width: 768px) {
+    .hero-container, .project-grid { grid-template-columns: 1fr; text-align: center; }
+    nav { width: 95%; padding: 15px; gap: 10px; font-size: 0.7rem; }
+    .profile-pic { margin: 0 auto; }
+}
+
+
+/* This targets the "Email", "Name", and "Message" hints specifically */
+.contact-form input::placeholder, 
+.contact-form textarea::placeholder {
+    color: #ffffff; /* You can change this to var(--mint) or a hex like #ffffff */
+    opacity: 0.8;          /* Makes it slightly transparent so it looks professional */
+    font-style: italic;   /* Optional: makes the hint text stand out from the typing text */
+}
+
+/* This changes the color of the text WHILE you are typing */
+.contact-form input, 
+.contact-form textarea {
+    color: #ffffff; 
+}
+
+/* Container for the icons */
+.socials {
+    margin-top: 25px;
+    display: flex;
+    gap: 25px; /* Space between the icons */
+}
+
+/* Targeting the icons specifically */
+.socials a {
+    font-size: 2rem; /* Change this to 2.5rem or 3rem to make them even bigger */
+    color: #ffffff;  /* Basic white color */
+    transition: all 0.3s ease;
+    text-decoration: none;
+    display: inline-block;
+}
+
+/* Hover effects to make them interactive */
+.socials a:hover {
+    transform: scale(1.2) translateY(-5px); /* Grows and lifts up */
+}
+
+/* Individual colors for a premium look */
+.socials a .fa-linkedin:hover {
+    color: #0077b5; /* LinkedIn Blue */
+    filter: drop-shadow(0 0 10px #0077b5);
+}
+
+.socials a .fa-github:hover {
+    color: var(--pink); /* Match your theme pink */
+    filter: drop-shadow(0 0 10px var(--pink));
+}
+
+.socials a .fa-envelope:hover {
+    color: var(--mint); /* Match your theme mint */
+    filter: drop-shadow(0 0 10px var(--mint));
+}
+
+
+/* --- THE MISSING ANIMATION INSTRUCTIONS --- */
+@keyframes fountainStream {
+    0% {
+        opacity: 0;
+        transform: translate(0, 0) scale(0.3);
+    }
+    /* FAST POP: Jump out and shoot to the far RIGHT side of the page */
+    15% {
+        opacity: 1;
+        transform: translate(500px, -150px) scale(1.2); 
+    }
+    /* SLOW GLIDE: Move from the Right side across to the LEFT side */
+    85% {
+        opacity: 1;
+        transform: translate(-600px, -220px) scale(1); 
+    }
+    /* EXIT: Fade out and disappear at the far left */
+    100% {
+        opacity: 0;
+        transform: translate(-800px, -250px) scale(0.5);
+    }
+}
+
+/* Apply this animation to the images when the jar is hovered */
+.jar-container:hover .stream-img {
+    animation: fountainStream 8s infinite linear;
+}
+
+.stream-img {
+    position: absolute;
+    width: 130px;   /* Big enough to see clearly */
+    height: 130px;
+    object-fit: cover;
+    border-radius: 15px;
+    border: 3px solid #ffffff;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.8);
+    opacity: 0; /* Hidden until hover */
+    pointer-events: none;
+    z-index: 1000; /* Keeps them on top of everything */
+}

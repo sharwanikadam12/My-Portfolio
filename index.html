@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sharwani Kadam | Portfolio</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Playfair+Display:ital,wght@0,600;1,600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div id="intro-overlay">
+        <div class="intro-dot"></div>
+        <span class="intro-text">Welcome to Sharwani's Portfolio</span>
+    </div>
+
+    <canvas id="cursor-canvas"></canvas>
+
+    <nav>
+        <a href="#home" class="nav-link active">Home</a>
+        <a href="#projects" class="nav-link">Projects</a>
+        <a href="#skills" class="nav-link">Skills</a>
+        <a href="#about" class="nav-link">About</a>
+        <a href="#contact" class="nav-link">Contact</a>
+    </nav>
+
+    <section id="home">
+        <div class="hero-container">
+            <div class="hero-img-wrapper">
+                <div class="profile-pic" >
+                     <img src="profile.jpeg" alt="Sharwani Kadam" class="hero-img">
+                </div>
+            </div>
+            <div class="hero-content">
+                <h1>Hello, I am <br><span>Sharwani Kadam</span></h1>
+                <p>"Code is the poetry of logic; design is the soul of function."</p>
+                <a href="#contact" class="btn-say-hello">Say Hello</a>
+               <div class="socials">
+                        <a href="https://www.linkedin.com/in/sharwani-kadam-35b5b3313/" target="_blank"><i class="fab fa-linkedin"></i></a>
+
+                            <a href="https://github.com/sharwanikadam12" target="_blank"><i class="fab fa-github"></i></a>
+                        <a href="mailto:email@example.com"><i class="fas fa-envelope"></i></a>
+                    
+            </div>
+        </div>
+    </section>
+
+    <section id="projects">
+        <h2 class="section-title">Projects</h2>
+        <div class="project-grid">
+            <div class="flip-card">
+                <div class="flip-card-inner">
+                    <div class="flip-front">
+                        <h3>Smart Trolley</h3>
+                        <span class="badge">Patent Approved</span>
+                    </div>
+                    <div class="flip-back">
+                        <p>An IoT solution for automated retail billing systems.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="flip-card">
+                <div class="flip-card-inner">
+                    <div class="flip-front"><h3>Dementia Detection</h3></div>
+                    <div class="flip-back"><p>Web platform for early-stage cognitive screening.</p></div>
+                </div>
+            </div>
+            <div class="flip-card">
+                <div class="flip-card-inner">
+                    <div class="flip-front"><h3>Wedding Planner UI</h3></div>
+                    <div class="flip-back"><p>Elegant UX for stress-free event management.</p></div>
+                </div>
+            </div>
+            <div class="flip-card">
+                <div class="flip-card-inner">
+                    <div class="flip-front"><h3>Crop Boost AI</h3></div>
+                    <div class="flip-back"><p>AI-driven agricultural optimization tool.</p></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="skills">
+        <div class="dock-container">
+    <nav class="dock">
+        <a href="#home" class="dock-item" data-name="Home"><i class="fas fa-home"></i></a>
+        <a href="#projects" class="dock-item" data-name="Projects"><i class="fas fa-code"></i></a>
+        <a href="#skills" class="dock-item" data-name="Skills"><i class="fas fa-brain"></i></a>
+        <a href="#about" class="dock-item" data-name="About"><i class="fas fa-user-heart"></i></a>
+        <a href="#contact" class="dock-item" data-name="Contact"><i class="fas fa-paper-plane"></i></a>
+    </nav>
+</div>
+
+<section id="skills">
+    <h2 class="section-title">Technical Arsenal</h2>
+    <div class="skills-3d-grid">
+        <div class="skill-card-3d" style="--accent: var(--mint)">
+            <i class="fab fa-html5"></i>
+            <span>HTML & CSS</span>
+        </div>
+        <div class="skill-card-3d" style="--accent: var(--purple)">
+            <i class="fab fa-js"></i>
+            <span>JavaScript</span>
+        </div>
+        <div class="skill-card-3d" style="--accent: var(--pink)">
+            <i class="fab fa-python"></i>
+            <span>Python</span>
+        </div>
+        <div class="skill-card-3d" style="--accent: var(--blue)">
+            <i class="fas fa-pen-nib"></i>
+            <span>UI/UX Design</span>
+        </div>
+        <div class="skill-card-3d" style="--accent: var(--mint)">
+            <i class="fas fa-terminal"></i>
+            <span>C Language</span>
+        </div>
+        <div class="skill-card-3d" style="--accent: var(--purple)">
+            <i class="fas fa-lightbulb"></i>
+            <span>Problem Solving</span>
+        </div>
+    </div>
+</section>
+
+
+
+ <section id="about">
+    <h2 class="section-title">Beyond the Code</h2>
+    <p class="section-subtitle">Hover over the jars to see my passions</p>
+    
+    <div class="jars-wrapper">
+        
+        <div class="jar-container" id="painting-jar">
+            <div class="jar-lid"></div>
+            <div class="jar"></div>
+            <div class="jar-label">🎨 Painting</div>
+            <div class="jar-content-fountain">
+                <img src="https://via.placeholder.com/150" alt="Painting 1" class="fountain-img img-1">
+                <img src="https://via.placeholder.com/150" alt="Painting 2" class="fountain-img img-2">
+                <img src="https://via.placeholder.com/150" alt="Painting 3" class="fountain-img img-3">
+                <img src="https://via.placeholder.com/150" alt="Painting 4" class="fountain-img img-4">
+                <img src="https://via.placeholder.com/150" alt="Painting 5" class="fountain-img img-5">
+            </div>
+        </div>
+
+        <div class="jar-container" id="dance-jar">
+            <div class="jar-lid"></div>
+            <div class="jar"></div>
+            <div class="jar-label">💃 Dance</div>
+            <div class="jar-content-fountain">
+                <img src="https://via.placeholder.com/150" alt="Dance 1" class="fountain-img img-1">
+                <img src="https://via.placeholder.com/150" alt="Dance 2" class="fountain-img img-2">
+                <img src="https://via.placeholder.com/150" alt="Dance 3" class="fountain-img img-3">
+                <img src="https://via.placeholder.com/150" alt="Dance 4" class="fountain-img img-4">
+                <img src="https://via.placeholder.com/150" alt="Dance 5" class="fountain-img img-5">
+            </div>
+        </div>
+
+        <div class="jar-container" id="travel-jar">
+            <div class="jar-lid"></div>
+            <div class="jar"></div>
+            <div class="jar-label">✈️ Travel</div>
+            <div class="jar-content-fountain">
+                <img src="https://via.placeholder.com/150" alt="Travel 1" class="fountain-img img-1">
+                <img src="https://via.placeholder.com/150" alt="Travel 2" class="fountain-img img-2">
+                <img src="https://via.placeholder.com/150" alt="Travel 3" class="fountain-img img-3">
+                <img src="https://via.placeholder.com/150" alt="Travel 4" class="fountain-img img-4">
+                <img src="https://via.placeholder.com/150" alt="Travel 5" class="fountain-img img-5">
+            </div>
+        </div>
+
+    </div>
+</section>
+
+
+
+    <section id="contact">
+        <h2 class="section-title">Get In Touch</h2>
+        <div class="contact-form">
+            <input type="text" placeholder="Name">
+            <input type="email" placeholder="Email">
+            <textarea placeholder="Message" rows="5"></textarea>
+            <button class="submit-btn">Send Message</button>
+        </div>
+        <footer>
+            <p>Sharwani Kadam | +91 9529317787</p>
+        </footer>
+    </section>
+
+    <script src="script.js"></script>
+</body>
+</html>
